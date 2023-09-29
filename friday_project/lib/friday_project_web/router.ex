@@ -18,6 +18,12 @@ defmodule FridayProjectWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    live "/first_dev_experiences", FirstDevExperienceLive.Index, :index
+    live "/first_dev_experiences/new", FirstDevExperienceLive.Index, :new
+    live "/first_dev_experiences/:id/edit", FirstDevExperienceLive.Index, :edit
+
+    live "/first_dev_experiences/:id", FirstDevExperienceLive.Show, :show
+    live "/first_dev_experiences/:id/show/edit", FirstDevExperienceLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.
