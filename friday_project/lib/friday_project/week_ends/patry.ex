@@ -3,17 +3,18 @@ defmodule FridayProject.WeekEnds.Patry do
   import Ecto.Changeset
 
   schema "parties" do
-    field :name, :string
-    field :date_party, :naive_datetime
-    field :first_dev_experience_id, :id
+    field(:name, :string)
+    field(:date_party, :naive_datetime)
+    belongs_to(:first_dev_experience, FridayProject.Fridays.FirstDevExperience)
 
     timestamps()
   end
 
   @doc false
-  def changeset(patry, attrs) do
-    patry
-    |> cast(attrs, [:date_party, :name])
+  def changeset(party, attrs) do
+    party
+    |> cast(attrs, [:date_party, :name, :first_dev_experience_id])
+    |> foreign_key_constraint(:first_dev_experience_id)
     |> validate_required([:date_party, :name])
   end
 end

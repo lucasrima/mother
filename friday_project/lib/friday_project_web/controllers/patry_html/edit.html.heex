@@ -1,6 +1,9 @@
 <.header>
   Edit Patry <%= @patry.id %>
-  <:subtitle>Use this form to manage patry records in your database.</:subtitle>
+    <:subtitle>Use this form to manage patry records in your database.</:subtitle>
+    <:col :let={patry} label="First dev experience">
+      <%= paty.first_dev_experience.name %>
+    </:col>
 </.header>
 
 <.patry_form changeset={@changeset} action={~p"/parties/#{@patry}"} />

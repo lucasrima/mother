@@ -5,7 +5,7 @@ defmodule FridayProjectWeb.PatryController do
   alias FridayProject.WeekEnds.Patry
 
   def index(conn, _params) do
-    parties = WeekEnds.list_parties()
+    parties = WeekEnds.list_parties_with_preload()
     render(conn, :index, parties: parties)
   end
 
@@ -27,8 +27,14 @@ defmodule FridayProjectWeb.PatryController do
   end
 
   def show(conn, %{"id" => id}) do
-    patry = WeekEnds.get_patry!(id)
+    patry = WeekEnds.get_patry_with_preload!(id)
     render(conn, :show, patry: patry)
+  end
+
+  def edit(conn, %{"id" => id}) do
+    patry = WeekEnds.get_patry_with_preload!(id)
+    changeset = WeekEnds.change_patry(patry)
+    render(conn, :edit, patry: patry, changeset: changeset)
   end
 
   def edit(conn, %{"id" => id}) do

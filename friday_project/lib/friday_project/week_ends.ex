@@ -21,6 +21,12 @@ defmodule FridayProject.WeekEnds do
     Repo.all(Patry)
   end
 
+  def list_parties_with_preload do
+    Patry
+    |> Repo.all()
+    |> Repo.preload(:first_dev_experience)
+  end
+
   @doc """
   Gets a single patry.
 
@@ -35,7 +41,9 @@ defmodule FridayProject.WeekEnds do
       ** (Ecto.NoResultsError)
 
   """
-  def get_patry!(id), do: Repo.get!(Patry, id)
+  def get_party!(id), do: Repo.get!(Patry, id)
+
+  def get_party_with_preload!(id), do: Repo.get!(Patry, id) |> Repo.preload(:first_dev_experience)
 
   @doc """
   Creates a patry.
