@@ -1,0 +1,24 @@
+<.header>
+  Listing Parties
+  <:actions>
+    <.link href={~p"/parties/new"}>
+      <.button>New Patry</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table id="parties" rows={@parties} row_click={&JS.navigate(~p"/parties/#{&1}")}>
+  <:col :let={patry} label="Date party"><%= patry.date_party %></:col>
+  <:col :let={patry} label="Name"><%= patry.name %></:col>
+  <:action :let={patry}>
+    <div class="sr-only">
+      <.link navigate={~p"/parties/#{patry}"}>Show</.link>
+    </div>
+    <.link navigate={~p"/parties/#{patry}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={patry}>
+    <.link href={~p"/parties/#{patry}"} method="delete" data-confirm="Are you sure?">
+      Delete
+    </.link>
+  </:action>
+</.table>

@@ -1,0 +1,8 @@
+<.header>
+  Edit Patry <%= @patry.id %>
+  <:subtitle>Use this form to manage patry records in your database.</:subtitle>
+</.header>
+
+<.patry_form changeset={@changeset} action={~p"/parties/#{@patry}"} />
+
+<.back navigate={~p"/parties"}>Back to parties</.back>

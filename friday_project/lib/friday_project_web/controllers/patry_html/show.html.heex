@@ -1,0 +1,16 @@
+<.header>
+  Patry <%= @patry.id %>
+  <:subtitle>This is a patry record from your database.</:subtitle>
+  <:actions>
+    <.link href={~p"/parties/#{@patry}/edit"}>
+      <.button>Edit patry</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Date party"><%= @patry.date_party %></:item>
+  <:item title="Name"><%= @patry.name %></:item>
+</.list>
+
+<.back navigate={~p"/parties"}>Back to parties</.back>

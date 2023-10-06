@@ -19,7 +19,7 @@ defmodule FridayProjectWeb.Router do
 
     get("/", PageController, :home)
     resources("/pinguins", PinguinController)
-
+    resources("/parties", PatryController)
     live("/first_dev_experiences", FirstDevExperienceLive.Index, :index)
     live("/first_dev_experiences/new", FirstDevExperienceLive.Index, :new)
     live("/first_dev_experiences/:id/edit", FirstDevExperienceLive.Index, :edit)
