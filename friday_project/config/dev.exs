@@ -2,8 +2,8 @@ import Config
 
 # Configure your database
 config :friday_project, FridayProject.Repo,
-  username: "elixir",
-  password: "mysecretpassword",
+  username: "toto",
+  password: "PNJ",
   hostname: "localhost",
   database: "friday_project_dev",
   stacktrace: true,

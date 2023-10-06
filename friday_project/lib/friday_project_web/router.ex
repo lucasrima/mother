@@ -2,28 +2,29 @@ defmodule FridayProjectWeb.Router do
   use FridayProjectWeb, :router
 
   pipeline :browser do
-    plug :accepts, ["html"]
-    plug :fetch_session
-    plug :fetch_live_flash
-    plug :put_root_layout, html: {FridayProjectWeb.Layouts, :root}
-    plug :protect_from_forgery
-    plug :put_secure_browser_headers
+    plug(:accepts, ["html"])
+    plug(:fetch_session)
+    plug(:fetch_live_flash)
+    plug(:put_root_layout, html: {FridayProjectWeb.Layouts, :root})
+    plug(:protect_from_forgery)
+    plug(:put_secure_browser_headers)
   end
 
   pipeline :api do
-    plug :accepts, ["json"]
+    plug(:accepts, ["json"])
   end
 
   scope "/", FridayProjectWeb do
-    pipe_through :browser
+    pipe_through(:browser)
 
-    get "/", PageController, :home
-    live "/first_dev_experiences", FirstDevExperienceLive.Index, :index
-    live "/first_dev_experiences/new", FirstDevExperienceLive.Index, :new
-    live "/first_dev_experiences/:id/edit", FirstDevExperienceLive.Index, :edit
+    get("/", PageController, :home)
+    live("/first_dev_experiences", FirstDevExperienceLive.Index, :index)
+    live("/first_dev_experiences/new", FirstDevExperienceLive.Index, :new)
+    live("/first_dev_experiences/:id/edit", FirstDevExperienceLive.Index, :edit)
 
-    live "/first_dev_experiences/:id", FirstDevExperienceLive.Show, :show
-    live "/first_dev_experiences/:id/show/edit", FirstDevExperienceLive.Show, :edit
+    live("/first_dev_experiences/:id", FirstDevExperienceLive.Show, :show)
+
+    live("/first_dev_experiences/:id/show/edit", FirstDevExperienceLive.Show, :edit)
   end
 
   # Other scopes may use custom stacks.
@@ -41,10 +42,10 @@ defmodule FridayProjectWeb.Router do
     import Phoenix.LiveDashboard.Router
 
     scope "/dev" do
-      pipe_through :browser
+      pipe_through(:browser)
 
-      live_dashboard "/dashboard", metrics: FridayProjectWeb.Telemetry
-      forward "/mailbox", Plug.Swoosh.MailboxPreview
+      live_dashboard("/dashboard", metrics: FridayProjectWeb.Telemetry)
+      forward("/mailbox", Plug.Swoosh.MailboxPreview)
     end
   end
 end
