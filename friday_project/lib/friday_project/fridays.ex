@@ -101,4 +101,100 @@ defmodule FridayProject.Fridays do
   def change_first_dev_experience(%FirstDevExperience{} = first_dev_experience, attrs \\ %{}) do
     FirstDevExperience.changeset(first_dev_experience, attrs)
   end
+
+  alias FridayProject.Fridays.Pnj
+
+  @doc """
+  Returns the list of pnjs.
+
+  ## Examples
+
+      iex> list_pnjs()
+      [%Pnj{}, ...]
+
+  """
+  def list_pnjs do
+    Repo.all(Pnj)
+  end
+
+  @doc """
+  Gets a single pnj.
+
+  Raises `Ecto.NoResultsError` if the Pnj does not exist.
+
+  ## Examples
+
+      iex> get_pnj!(123)
+      %Pnj{}
+
+      iex> get_pnj!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_pnj!(id), do: Repo.get!(Pnj, id)
+
+  @doc """
+  Creates a pnj.
+
+  ## Examples
+
+      iex> create_pnj(%{field: value})
+      {:ok, %Pnj{}}
+
+      iex> create_pnj(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_pnj(attrs \\ %{}) do
+    %Pnj{}
+    |> Pnj.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a pnj.
+
+  ## Examples
+
+      iex> update_pnj(pnj, %{field: new_value})
+      {:ok, %Pnj{}}
+
+      iex> update_pnj(pnj, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_pnj(%Pnj{} = pnj, attrs) do
+    pnj
+    |> Pnj.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a pnj.
+
+  ## Examples
+
+      iex> delete_pnj(pnj)
+      {:ok, %Pnj{}}
+
+      iex> delete_pnj(pnj)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_pnj(%Pnj{} = pnj) do
+    Repo.delete(pnj)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking pnj changes.
+
+  ## Examples
+
+      iex> change_pnj(pnj)
+      %Ecto.Changeset{data: %Pnj{}}
+
+  """
+  def change_pnj(%Pnj{} = pnj, attrs \\ %{}) do
+    Pnj.changeset(pnj, attrs)
+  end
 end

@@ -60,4 +60,62 @@ defmodule FridayProject.FridaysTest do
       assert %Ecto.Changeset{} = Fridays.change_first_dev_experience(first_dev_experience)
     end
   end
+
+  describe "pnjs" do
+    alias FridayProject.Fridays.Pnj
+
+    import FridayProject.FridaysFixtures
+
+    @invalid_attrs %{name: nil, description: nil, nb_thing: nil}
+
+    test "list_pnjs/0 returns all pnjs" do
+      pnj = pnj_fixture()
+      assert Fridays.list_pnjs() == [pnj]
+    end
+
+    test "get_pnj!/1 returns the pnj with given id" do
+      pnj = pnj_fixture()
+      assert Fridays.get_pnj!(pnj.id) == pnj
+    end
+
+    test "create_pnj/1 with valid data creates a pnj" do
+      valid_attrs = %{name: "some name", description: "some description", nb_thing: 42}
+
+      assert {:ok, %Pnj{} = pnj} = Fridays.create_pnj(valid_attrs)
+      assert pnj.name == "some name"
+      assert pnj.description == "some description"
+      assert pnj.nb_thing == 42
+    end
+
+    test "create_pnj/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Fridays.create_pnj(@invalid_attrs)
+    end
+
+    test "update_pnj/2 with valid data updates the pnj" do
+      pnj = pnj_fixture()
+      update_attrs = %{name: "some updated name", description: "some updated description", nb_thing: 43}
+
+      assert {:ok, %Pnj{} = pnj} = Fridays.update_pnj(pnj, update_attrs)
+      assert pnj.name == "some updated name"
+      assert pnj.description == "some updated description"
+      assert pnj.nb_thing == 43
+    end
+
+    test "update_pnj/2 with invalid data returns error changeset" do
+      pnj = pnj_fixture()
+      assert {:error, %Ecto.Changeset{}} = Fridays.update_pnj(pnj, @invalid_attrs)
+      assert pnj == Fridays.get_pnj!(pnj.id)
+    end
+
+    test "delete_pnj/1 deletes the pnj" do
+      pnj = pnj_fixture()
+      assert {:ok, %Pnj{}} = Fridays.delete_pnj(pnj)
+      assert_raise Ecto.NoResultsError, fn -> Fridays.get_pnj!(pnj.id) end
+    end
+
+    test "change_pnj/1 returns a pnj changeset" do
+      pnj = pnj_fixture()
+      assert %Ecto.Changeset{} = Fridays.change_pnj(pnj)
+    end
+  end
 end

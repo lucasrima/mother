@@ -19,4 +19,20 @@ defmodule FridayProject.FridaysFixtures do
 
     first_dev_experience
   end
+
+  @doc """
+  Generate a pnj.
+  """
+  def pnj_fixture(attrs \\ %{}) do
+    {:ok, pnj} =
+      attrs
+      |> Enum.into(%{
+        name: "some name",
+        description: "some description",
+        nb_thing: 42
+      })
+      |> FridayProject.Fridays.create_pnj()
+
+    pnj
+  end
 end

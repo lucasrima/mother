@@ -1,0 +1,43 @@
+<.header>
+  Listing Pnjs
+  <:actions>
+    <.link patch={~p"/pnjs/new"}>
+      <.button>New Pnj</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="pnjs"
+  rows={@streams.pnjs}
+  row_click={fn {_id, pnj} -> JS.navigate(~p"/pnjs/#{pnj}") end}
+>
+  <:col :let={{_id, pnj}} label="Name"><%= pnj.name %></:col>
+  <:col :let={{_id, pnj}} label="Description"><%= pnj.description %></:col>
+  <:col :let={{_id, pnj}} label="Nb thing"><%= pnj.nb_thing %></:col>
+  <:action :let={{_id, pnj}}>
+    <div class="sr-only">
+      <.link navigate={~p"/pnjs/#{pnj}"}>Show</.link>
+    </div>
+    <.link patch={~p"/pnjs/#{pnj}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, pnj}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: pnj.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+<.modal :if={@live_action in [:new, :edit]} id="pnj-modal" show on_cancel={JS.patch(~p"/pnjs")}>
+  <.live_component
+    module={FridayProjectWeb.PnjLive.FormComponent}
+    id={@pnj.id || :new}
+    title={@page_title}
+    action={@live_action}
+    pnj={@pnj}
+    patch={~p"/pnjs"}
+  />
+</.modal>

@@ -1,0 +1,28 @@
+<.header>
+  Pnj <%= @pnj.id %>
+  <:subtitle>This is a pnj record from your database.</:subtitle>
+  <:actions>
+    <.link patch={~p"/pnjs/#{@pnj}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit pnj</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Name"><%= @pnj.name %></:item>
+  <:item title="Description"><%= @pnj.description %></:item>
+  <:item title="Nb thing"><%= @pnj.nb_thing %></:item>
+</.list>
+
+<.back navigate={~p"/pnjs"}>Back to pnjs</.back>
+
+<.modal :if={@live_action == :edit} id="pnj-modal" show on_cancel={JS.patch(~p"/pnjs/#{@pnj}")}>
+  <.live_component
+    module={FridayProjectWeb.PnjLive.FormComponent}
+    id={@pnj.id}
+    title={@page_title}
+    action={@live_action}
+    pnj={@pnj}
+    patch={~p"/pnjs/#{@pnj}"}
+  />
+</.modal>

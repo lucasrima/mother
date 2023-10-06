@@ -25,6 +25,13 @@ defmodule FridayProjectWeb.Router do
     live("/first_dev_experiences/:id", FirstDevExperienceLive.Show, :show)
 
     live("/first_dev_experiences/:id/show/edit", FirstDevExperienceLive.Show, :edit)
+
+    live("/pnjs", PnjLive.Index, :index)
+    live("/pnjs/new", PnjLive.Index, :new)
+    live("/pnjs/:id/edit", PnjLive.Index, :edit)
+
+    live("/pnjs/:id", PnjLive.Show, :show)
+    live("/pnjs/:id/show/edit", PnjLive.Show, :edit)
   end
 
   # Other scopes may use custom stacks.
