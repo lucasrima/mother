@@ -1,0 +1,24 @@
+<.header>
+  Listing Pinguins
+  <:actions>
+    <.link href={~p"/pinguins/new"}>
+      <.button>New Pinguin</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table id="pinguins" rows={@pinguins} row_click={&JS.navigate(~p"/pinguins/#{&1}")}>
+  <:col :let={pinguin} label="Name"><%= pinguin.name %></:col>
+  <:col :let={pinguin} label="Age"><%= pinguin.age %></:col>
+  <:action :let={pinguin}>
+    <div class="sr-only">
+      <.link navigate={~p"/pinguins/#{pinguin}"}>Show</.link>
+    </div>
+    <.link navigate={~p"/pinguins/#{pinguin}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={pinguin}>
+    <.link href={~p"/pinguins/#{pinguin}"} method="delete" data-confirm="Are you sure?">
+      Delete
+    </.link>
+  </:action>
+</.table>

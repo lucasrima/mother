@@ -1,0 +1,16 @@
+<.header>
+  Pinguin <%= @pinguin.id %>
+  <:subtitle>This is a pinguin record from your database.</:subtitle>
+  <:actions>
+    <.link href={~p"/pinguins/#{@pinguin}/edit"}>
+      <.button>Edit pinguin</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Name"><%= @pinguin.name %></:item>
+  <:item title="Age"><%= @pinguin.age %></:item>
+</.list>
+
+<.back navigate={~p"/pinguins"}>Back to pinguins</.back>
